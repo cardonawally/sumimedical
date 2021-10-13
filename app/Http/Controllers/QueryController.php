@@ -46,7 +46,7 @@ class QueryController extends Controller
             ->map(function ($row) {
                 return [
                     'rol' => $row->name,
-                    'usuario' => "{$row->user->name} {$row->user->last_name}"
+                    'user' => "{$row->user->name} {$row->user->last_name}"
                 ];
             });
 

@@ -21,13 +21,73 @@
         <template v-if="queryResult">
             <div class="items-center text-center">
                 <div class="bg-white border-transparent rounded-md relative w-4/5 mt-10 mx-auto">
+                    <template v-if="queryResult.type === 'role'">
+                        <table class="w-full text-center">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" class="font-medium px-5 py-3 border-b-2 col-span-2">
+                                        Usuario con rol 1 y 2
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="font-medium px-5 py-3 border-b-2"> USUARIO </th>
+                                    <th class="font-medium px-5 py-3 border-b-2"> ROL </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="user in queryResult.data">
+                                    <td class="px-5 py-3 border-b-2">{{ user.name + ' ' +  user.last_name }}</td>
+                                    <td class="px-5 py-3 border-b-2">{{ user.roles.name }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </template>
+
+                    <template v-if="queryResult.type === 'permission'">
+                        <table class="w-full text-center">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" class="font-medium px-5 py-3 border-b-2 col-span-2">
+                                        Permisos asociados al rol 1
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="font-medium px-5 py-3 border-b-2"> PERMISO </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="permission in queryResult.data">
+                                    <td class="px-5 py-3 border-b-2">{{ permission.name }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </template>
+
+                    <template v-if="queryResult.type === 'permission_role'">
+                        <table class="w-full text-center">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" class="font-medium px-5 py-3 border-b-2 col-span-2">
+                                        Usuarios y rol que tienen el permiso 2
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="font-medium px-5 py-3 border-b-2"> ROL </th>
+                                    <th class="font-medium px-5 py-3 border-b-2"> USUARIO </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="rol_user in queryResult.data">
+                                    <td class="px-5 py-3 border-b-2">{{ rol_user.rol }}</td>
+                                    <td class="px-5 py-3 border-b-2">{{ rol_user.user }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </template>
                 </div>
             </div>
         </template>
-
-
-
-
 
         <div class="items-center text-center">
             <div class="bg-white border-transparent rounded-md relative w-4/5 mt-10 mx-auto">
@@ -197,7 +257,10 @@ export default {
 
         view_role(){
             axios.get(route('queries.role')).then(resp => {
-                this.queryResult = resp.data
+                this.queryResult = {
+                    data: resp.data,
+                    type: 'role'
+                }
             }).catch(err => {
                 alert(err.data)
             })
@@ -205,7 +268,10 @@ export default {
 
         permission(){
             axios.get(route('queries.permission')).then(resp => {
-                this.queryResult = resp.data
+                this.queryResult = {
+                    data: resp.data,
+                    type: 'permission'
+                }
             }).catch(err => {
                 alert(err.data)
             })
@@ -213,7 +279,10 @@ export default {
 
         permission_role(){
             axios.get(route('queries.permission-role')).then(resp => {
-                this.queryResult = resp.data
+                this.queryResult = {
+                    data: resp.data,
+                    type: 'permission_role'
+                }
             }).catch(err => {
                 alert(err.data)
             })
