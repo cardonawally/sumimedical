@@ -3823,7 +3823,7 @@ __webpack_require__.r(__webpack_exports__);
     save: function save(data) {
       var _this = this;
 
-      axios.post(route('save_permissions'), data).then(function (resp) {
+      axios.post(route('permissions.store'), data).then(function (resp) {
         _this.closeModal();
 
         _this.permisos_array = resp.data;
@@ -3949,7 +3949,7 @@ __webpack_require__.r(__webpack_exports__);
     save: function save(data) {
       var _this = this;
 
-      axios.post(route('save_roles'), data).then(function (resp) {
+      axios.post(route('roles.store'), data).then(function (resp) {
         _this.closeModal();
 
         _this.roles_array = resp.data;
@@ -4115,6 +4115,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4135,7 +4145,8 @@ __webpack_require__.r(__webpack_exports__);
       modalData: null,
       isOpenModal: false,
       isOpen: false,
-      role: []
+      role: [],
+      queryResult: null
     };
   },
   methods: {
@@ -4149,7 +4160,7 @@ __webpack_require__.r(__webpack_exports__);
     save: function save(data) {
       var _this = this;
 
-      axios.post(route('save_users'), data).then(function (resp) {
+      axios.post(route('users.store'), data).then(function (resp) {
         _this.closeModal();
 
         _this.users_array = resp.data;
@@ -4157,6 +4168,33 @@ __webpack_require__.r(__webpack_exports__);
         if (error.response.status === 422) {
           alert('Error');
         }
+      });
+    },
+    view_role: function view_role() {
+      var _this2 = this;
+
+      axios.get(route('queries.role')).then(function (resp) {
+        _this2.queryResult = resp.data;
+      })["catch"](function (err) {
+        alert(err.data);
+      });
+    },
+    permission: function permission() {
+      var _this3 = this;
+
+      axios.get(route('queries.permission')).then(function (resp) {
+        _this3.queryResult = resp.data;
+      })["catch"](function (err) {
+        alert(err.data);
+      });
+    },
+    permission_role: function permission_role() {
+      var _this4 = this;
+
+      axios.get(route('queries.permission-role')).then(function (resp) {
+        _this4.queryResult = resp.data;
+      })["catch"](function (err) {
+        alert(err.data);
       });
     }
   }
@@ -33656,8 +33694,8 @@ var render = function() {
                           "jet-nav-link",
                           {
                             attrs: {
-                              href: _vm.route("view_users"),
-                              active: _vm.route().current("view_users")
+                              href: _vm.route("users.index"),
+                              active: _vm.route().current("users.index")
                             }
                           },
                           [
@@ -33681,8 +33719,8 @@ var render = function() {
                           "jet-nav-link",
                           {
                             attrs: {
-                              href: _vm.route("view_permissions"),
-                              active: _vm.route().current("view_permissions")
+                              href: _vm.route("permissions.index"),
+                              active: _vm.route().current("permissions.index")
                             }
                           },
                           [
@@ -33706,8 +33744,8 @@ var render = function() {
                           "jet-nav-link",
                           {
                             attrs: {
-                              href: _vm.route("view_roles"),
-                              active: _vm.route().current("view_roles")
+                              href: _vm.route("roles.index"),
+                              active: _vm.route().current("roles.index")
                             }
                           },
                           [
@@ -35610,7 +35648,7 @@ var render = function() {
                   staticClass:
                     "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded",
                   attrs: { type: "button" },
-                  on: { click: _vm.view_permissions }
+                  on: { click: _vm.permission }
                 },
                 [
                   _vm._v(
@@ -35625,7 +35663,7 @@ var render = function() {
                   staticClass:
                     "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded",
                   attrs: { type: "button" },
-                  on: { click: _vm.view_permissions }
+                  on: { click: _vm.permission_role }
                 },
                 [
                   _vm._v(
@@ -35640,6 +35678,17 @@ var render = function() {
       ])
     },
     [
+      _vm._v(" "),
+      _vm.queryResult
+        ? [
+            _c("div", { staticClass: "items-center text-center" }, [
+              _c("div", {
+                staticClass:
+                  "bg-white border-transparent rounded-md relative w-4/5 mt-10 mx-auto"
+              })
+            ])
+          ]
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "items-center text-center" }, [
         _c(
@@ -36074,7 +36123,7 @@ var render = function() {
         )
       })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -38623,9 +38672,9 @@ var render = function() {
                     "inertia-link",
                     {
                       staticClass: "text-sm text-gray-700 underline",
-                      attrs: { href: "/dashboard" }
+                      attrs: { href: "/users" }
                     },
-                    [_vm._v("\n            Dashboard\n        ")]
+                    [_vm._v("\n            Home\n        ")]
                   )
                 : [
                     _c(

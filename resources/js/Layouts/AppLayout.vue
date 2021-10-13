@@ -17,17 +17,17 @@
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('view_users')" :active="route().current('view_users')">
+                                <jet-nav-link :href="route('users.index')" :active="route().current('users.index')">
                                     Usuarios
                                 </jet-nav-link>
                             </div>
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('view_permissions')" :active="route().current('view_permissions')">
+                                <jet-nav-link :href="route('permissions.index')" :active="route().current('permissions.index')">
                                     Permisos
                                 </jet-nav-link>
                             </div>
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('view_roles')" :active="route().current('view_roles')">
+                                <jet-nav-link :href="route('roles.index')" :active="route().current('roles.index')">
                                     Roles
                                 </jet-nav-link>
                             </div>

@@ -107,7 +107,7 @@ export default {
         },
 
         save(data) {
-            axios.post(route('save_permissions'), data).then(resp => {
+            axios.post(route('permissions.store'), data).then(resp => {
                 this.closeModal();
                 this.permisos_array = resp.data
             }).catch(error => {

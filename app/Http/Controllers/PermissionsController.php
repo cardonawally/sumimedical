@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Permission;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class PermissionsController extends Controller
 {
-    public function view_permissions(): \Inertia\Response
+    /**
+     * @return Response
+     */
+    public function index(): Response
     {
-
         $permisos = Permission::all();
 
         return Inertia::render('Applications/Permissions',[
@@ -21,7 +25,12 @@ class PermissionsController extends Controller
 
     }
 
-    public function save_permissions(Request $request): \Illuminate\Http\JsonResponse
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function store(Request $request): JsonResponse
     {
         try {
             Permission::create($request->all());

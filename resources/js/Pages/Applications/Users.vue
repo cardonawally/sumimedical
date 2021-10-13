@@ -8,15 +8,25 @@
             </button>
             <button type="button"
                     class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                    @click="view_permissions">
+                    @click="permission">
                 permisos que se tienen del rol 1
             </button>
             <button type="button"
                     class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                    @click="view_permissions">
+                    @click="permission_role">
                 usuarios y el rol que tienen el permiso 2
             </button>
         </template>
+
+        <template v-if="queryResult">
+            <div class="items-center text-center">
+                <div class="bg-white border-transparent rounded-md relative w-4/5 mt-10 mx-auto">
+                </div>
+            </div>
+        </template>
+
+
+
 
 
         <div class="items-center text-center">
@@ -159,7 +169,8 @@ export default {
             modalData: null,
             isOpenModal: false,
             isOpen: false,
-            role: []
+            role: [],
+            queryResult: null
         }
     },
 
@@ -174,7 +185,7 @@ export default {
         },
 
         save(data) {
-            axios.post(route('save_users'), data).then(resp => {
+            axios.post(route('users.store'), data).then(resp => {
                 this.closeModal();
                 this.users_array = resp.data
             }).catch(error => {
@@ -183,6 +194,30 @@ export default {
                 }
             })
         },
+
+        view_role(){
+            axios.get(route('queries.role')).then(resp => {
+                this.queryResult = resp.data
+            }).catch(err => {
+                alert(err.data)
+            })
+        },
+
+        permission(){
+            axios.get(route('queries.permission')).then(resp => {
+                this.queryResult = resp.data
+            }).catch(err => {
+                alert(err.data)
+            })
+        },
+
+        permission_role(){
+            axios.get(route('queries.permission-role')).then(resp => {
+                this.queryResult = resp.data
+            }).catch(err => {
+                alert(err.data)
+            })
+        }
     }
 }
 </script>

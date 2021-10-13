@@ -100,7 +100,7 @@ export default {
         },
 
         save(data) {
-            axios.post(route('save_roles'), data).then(resp => {
+            axios.post(route('roles.store'), data).then(resp => {
                 this.closeModal();
                 this.roles_array = resp.data
             }).catch(error => {

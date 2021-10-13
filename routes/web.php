@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PermissionsController;
+use App\Http\Controllers\QueryController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Foundation\Application;
@@ -34,15 +35,13 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('view_users', [UsersController::class, 'view_users'])->name('view_users');
-    Route::post('save_users',[UsersController::class, 'save_users'])->name('save_users');
-    Route::get('reques_role_one_and_two',[UsersController::class, 'reques_role_one_and_two'])->name('reques_role_one_and_two');
+    Route::resource('users', UsersController::class)->only('index', 'store');
+    Route::resource('permissions', PermissionsController::class)->only('index', 'store');
+    Route::resource('roles', RolesController::class)->only('index', 'store');
 
-    Route::get('view_permissions', [PermissionsController::class, 'view_permissions'])->name('view_permissions');
-    Route::post('save_permissions',[PermissionsController::class, 'save_permissions'])->name('save_permissions');
-    Route::get('view_roles', [RolesController::class, 'view_roles'])->name('view_roles');
-    Route::post('save_roles',[RolesController::class, 'save_roles'])->name('save_roles');
-
-
-
+    Route::prefix('queries')->group(function () {
+        Route::get('role', [QueryController::class, 'role'])->name('queries.role');
+        Route::get('permission', [QueryController::class, 'permission'])->name('queries.permission');
+        Route::get('permission-role', [QueryController::class, 'permission_role'])->name('queries.permission-role');
+    });
 });
