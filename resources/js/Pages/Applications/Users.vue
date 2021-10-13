@@ -1,5 +1,24 @@
 <template>
     <app-layout>
+        <template #header>
+            <button type="button"
+                    class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                    @click="view_role">
+                usuarios que tengan el rol 1 y 2.
+            </button>
+            <button type="button"
+                    class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                    @click="view_permissions">
+                permisos que se tienen del rol 1
+            </button>
+            <button type="button"
+                    class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                    @click="view_permissions">
+                usuarios y el rol que tienen el permiso 2
+            </button>
+        </template>
+
+
         <div class="items-center text-center">
             <div class="bg-white border-transparent rounded-md relative w-4/5 mt-10 mx-auto">
                 <table class="w-full text-center">
@@ -130,7 +149,7 @@ export default {
 
     props:{
         users: Array,
-        rol: Array
+        rol: Array,
     },
 
     data(){
@@ -138,7 +157,9 @@ export default {
             role_array: this.rol,
             users_array: this.users,
             modalData: null,
-            isOpenModal: false
+            isOpenModal: false,
+            isOpen: false,
+            role: []
         }
     },
 

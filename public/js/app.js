@@ -4096,6 +4096,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4114,7 +4133,9 @@ __webpack_require__.r(__webpack_exports__);
       role_array: this.rol,
       users_array: this.users,
       modalData: null,
-      isOpenModal: false
+      isOpenModal: false,
+      isOpen: false,
+      role: []
     };
   },
   methods: {
@@ -35562,7 +35583,64 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "app-layout",
+    {
+      scopedSlots: _vm._u([
+        {
+          key: "header",
+          fn: function() {
+            return [
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded",
+                  attrs: { type: "button" },
+                  on: { click: _vm.view_role }
+                },
+                [
+                  _vm._v(
+                    "\n            usuarios que tengan el rol 1 y 2.\n        "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded",
+                  attrs: { type: "button" },
+                  on: { click: _vm.view_permissions }
+                },
+                [
+                  _vm._v(
+                    "\n            permisos que se tienen del rol 1\n        "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass:
+                    "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded",
+                  attrs: { type: "button" },
+                  on: { click: _vm.view_permissions }
+                },
+                [
+                  _vm._v(
+                    "\n            usuarios y el rol que tienen el permiso 2\n        "
+                  )
+                ]
+              )
+            ]
+          },
+          proxy: true
+        }
+      ])
+    },
     [
+      _vm._v(" "),
       _c("div", { staticClass: "items-center text-center" }, [
         _c(
           "div",
