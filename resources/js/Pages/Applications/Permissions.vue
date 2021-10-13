@@ -9,7 +9,26 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <welcome />
+                    <table class="table" >
+                        <template>
+                            <thead>
+                            <tr>
+                                <th class="text-left">
+                                    id
+                                </th>
+                                <th class="text-left">
+                                    Nombre permiso
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="item in permisos_array">
+                                <td>{{ item.id }}</td>
+                                <td>{{ item.name }}</td>
+                            </tr>
+                            </tbody>
+                        </template>
+                    </table>
                 </div>
             </div>
         </div>
@@ -29,7 +48,7 @@
                                     Nombre Permiso
                                 </label>
                                 <div>
-                                    <v-text-field v-model="modalData.name" label="Another input"></v-text-field>
+                                    <input class="form-control border border-b-2 dark:border-dark-5" v-model="modalData.name">
                                 </div>
                             </div>
                         </div>
@@ -37,12 +56,9 @@
                 </template>
 
                 <template #footer>
-                    <v-btn
-                        color="secondary"
-                        elevation="2"
-                        large
-                        @click="save(modalData)"
-                    >Guardar</v-btn>
+                    <button @click="save(modalData)">
+                        Guardar
+                    </button>
                 </template>
             </jet-dialog-modal>
         </div>
@@ -54,9 +70,13 @@
 import JetDialogModal from "@/Jetstream/DialogModal";
 import AppLayout from '@/Layouts/AppLayout'
 import Welcome from '@/Jetstream/Welcome'
+import Button from "../../Jetstream/Button";
+import Input from "../../Jetstream/Input";
 
 export default {
     components: {
+        Input,
+        Button,
             AppLayout,
             Welcome,
         JetDialogModal
@@ -68,6 +88,8 @@ export default {
 
     data(){
       return{
+          permisos_array: this.permisos,
+
           isOpenModal: false,
           modalData: null,
       }
@@ -87,7 +109,7 @@ export default {
         save(data) {
             axios.post(route('save_permissions'), data).then(resp => {
                 this.closeReportsModal();
-                data = resp.data
+                this.permisos_array = resp.data
             }).catch(error => {
                 if (error.response.status === 422) {
                    alert('Error')

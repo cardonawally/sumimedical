@@ -25,7 +25,8 @@ class PermissionsController extends Controller
     {
         try {
             Permission::create($request->all());
-            return response()->json('success','200');
+            $permisos = Permission::all();
+            return response()->json($permisos,'200');
         }catch (Exception $ex){
             return response()->json($ex->getMessage(), 500);
         }

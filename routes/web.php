@@ -35,9 +35,12 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     })->name('dashboard');
 
     Route::get('view_users', [UsersController::class, 'view_users'])->name('view_users');
+    Route::post('save_users',[UsersController::class, 'save_users'])->name('save_users');
     Route::get('view_permissions', [PermissionsController::class, 'view_permissions'])->name('view_permissions');
     Route::post('save_permissions',[PermissionsController::class, 'save_permissions'])->name('save_permissions');
     Route::get('view_roles', [RolesController::class, 'view_roles'])->name('view_roles');
+    Route::post('save_roles',[RolesController::class, 'save_roles'])->name('save_roles');
+
 
 
 });

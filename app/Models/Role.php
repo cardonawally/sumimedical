@@ -9,6 +9,12 @@ class Role extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'name'];
+    protected $fillable = [ 'name'];
+
+
+    public function permissions(){
+        return $this->belongsToMany(Permission::class,'permissions_to_roles')
+            ->withPivot('permission_id');
+    }
 
 }

@@ -21,47 +21,47 @@ class ConfigSeeder extends Seeder
                 'last_name' =>  'Correa',
                 'phone'     =>  23445673,
                 'email'     =>  'drr@m.com',
-                'password'  => bcrypt('password')
+                'password'  => bcrypt('password'),
+                'role_id'   =>  1,
             ],
             [
                 'name'      =>  'pedro',
                 'last_name' =>  'Correa',
                 'phone'     =>  23435673,
                 'email'     =>  'pd@m.com',
-                'password'  => bcrypt('password')
+                'password'  => bcrypt('password'),
+                'role_id'   =>  1,
             ],
             [
                 'name'      =>  'juan',
                 'last_name' =>  'Correa',
                 'phone'     =>  23456735,
                 'email'     =>  'jd@m.com',
-                'password'  => bcrypt('password')
+                'password'  => bcrypt('password'),
+                'role_id'   =>  1,
             ],
             [
                 'name'      =>  'luci',
                 'last_name' =>  'Correa',
                 'phone'     =>  2345673,
                 'email'     =>  'dx@m.com',
-                'password'  => bcrypt('password')
+                'password'  => bcrypt('password'),
+                'role_id'   =>  1,
             ],
         ];
 
         $roles = [
             [
                 'name' => 'admin',
-                'user_id' => 1
             ],
             [
                 'name' => 'user',
-                'user_id' => 2
             ],
             [
                 'name' => 'pintor',
-                'user_id' => 3
             ],
             [
                 'name' => 'gerente',
-                'user_id' => 4
             ],
         ];
 
@@ -80,9 +80,8 @@ class ConfigSeeder extends Seeder
             ],
         ];
 
-
+        collect($roles)->each(function ($role){ Role::create($role); });
         collect($users)->each(function ($user){ User::create($user); });
         collect($permissions)->each(function ($permission){ Permission::create($permission); });
-        collect($roles)->each(function ($role){ Role::create($role); });
     }
 }
