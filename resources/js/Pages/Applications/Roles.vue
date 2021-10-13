@@ -1,66 +1,67 @@
 <template>
     <app-layout>
         <template #header>
-            <button  type="button" class="btn btn-primary font-semibold text-xl text-gray-800 leading-tight" @click="view_permissions">
+            <button type="button"
+                    class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                    @click="view_permissions">
                 Crear Rol
             </button>
         </template>
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <table class="table" >
-                        <template>
-                            <thead>
-                            <tr>
-                                <th class="text-left">
-                                    id
-                                </th>
-                                <th class="text-left">
-                                    Nombre Rol
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-for="item in roles_array">
-                                <td>{{ item.id }}</td>
-                                <td>{{ item.name }}</td>
-                            </tr>
-                            </tbody>
-                        </template>
-                    </table>
-                </div>
+        <div class="items-center text-center">
+            <div class="bg-white border-transparent rounded-md relative w-4/5 mt-10 mx-auto">
+                <table class="w-full text-center">
+                    <thead>
+                    <tr>
+                        <th class="font-medium px-5 py-3 border-b-2">
+                            ID
+                        </th>
+                        <th class="font-medium px-5 py-3 border-b-2">
+                            NOMBRE
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="item in roles_array">
+                        <td class="px-5 py-3 border-b-2">{{ item.id }}</td>
+                        <td class="px-5 py-3 border-b-2">{{ item.name }}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <div class="py-12">
-            <jet-dialog-modal :show="isOpenModal" @close="closeReportsModal" max-width=xl>
-                <template #title>
-                    <label > Crear Rol</label>
-                </template>
+        <jet-dialog-modal :show="isOpenModal" @close="closeModal" max-width=xl>
+            <template #title>
+                <label> Crear Rol</label>
+            </template>
 
-                <template #content v-if="modalData">
-                    <div class="p-5">
-                        <div class="gap-6">
-                            <div class="mt-1">
-                                <label class="flex flex-col sm:flex-row font-medium">
-                                    Nombre Rol
-                                </label>
-                                <div>
-                                    <input  class="form-control" v-model="modalData.name" label="Another input">
-                                </div>
+            <template #content v-if="modalData">
+                <div class="p-5">
+                    <div class="gap-6">
+                        <div class="mt-1">
+                            <label class="flex flex-col sm:flex-row font-medium">
+                                Nombre Rol
+                            </label>
+                            <div>
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" v-model="modalData.name" label="Another input">
                             </div>
                         </div>
                     </div>
-                </template>
+                </div>
+            </template>
 
-                <template #footer>
-                    <button @click="save(modalData)">
-                        Guardar
-                    </button>
-                </template>
-            </jet-dialog-modal>
-        </div>
+            <template #footer>
+                <button type="button" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" @click="save(modalData)">
+                    Guardar
+                </button>
+
+                <button type="button" class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded" @click="closeModal">
+                    Cancelar
+                </button>
+            </template>
+        </jet-dialog-modal>
+
     </app-layout>
 </template>
 
@@ -76,31 +77,31 @@ export default {
         JetDialogModal
     },
 
-    props:{
+    props: {
         roles: Array,
     },
 
-    data(){
-        return{
+    data() {
+        return {
             roles_array: this.roles,
             modalData: null,
             isOpenModal: false
         }
     },
 
-    methods:{
-        view_permissions(row){
+    methods: {
+        view_permissions(row) {
             this.isOpenModal = true
             this.modalData = row
         },
 
-        closeReportsModal(){
+        closeModal() {
             this.isOpenModal = false
         },
 
         save(data) {
             axios.post(route('save_roles'), data).then(resp => {
-                this.closeReportsModal();
+                this.closeModal();
                 this.roles_array = resp.data
             }).catch(error => {
                 if (error.response.status === 422) {

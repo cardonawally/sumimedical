@@ -3817,14 +3817,14 @@ __webpack_require__.r(__webpack_exports__);
       this.isOpenModal = true;
       this.modalData = row;
     },
-    closeReportsModal: function closeReportsModal() {
+    closeModal: function closeModal() {
       this.isOpenModal = false;
     },
     save: function save(data) {
       var _this = this;
 
       axios.post(route('save_permissions'), data).then(function (resp) {
-        _this.closeReportsModal();
+        _this.closeModal();
 
         _this.permisos_array = resp.data;
       })["catch"](function (error) {
@@ -3918,6 +3918,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -3942,14 +3943,14 @@ __webpack_require__.r(__webpack_exports__);
       this.isOpenModal = true;
       this.modalData = row;
     },
-    closeReportsModal: function closeReportsModal() {
+    closeModal: function closeModal() {
       this.isOpenModal = false;
     },
     save: function save(data) {
       var _this = this;
 
       axios.post(route('save_roles'), data).then(function (resp) {
-        _this.closeReportsModal();
+        _this.closeModal();
 
         _this.roles_array = resp.data;
       })["catch"](function (error) {
@@ -4087,6 +4088,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4113,14 +4122,14 @@ __webpack_require__.r(__webpack_exports__);
       this.isOpenModal = true;
       this.modalData = row;
     },
-    closeReportsModal: function closeReportsModal() {
+    closeModal: function closeModal() {
       this.isOpenModal = false;
     },
     save: function save(data) {
       var _this = this;
 
       axios.post(route('save_users'), data).then(function (resp) {
-        _this.closeReportsModal();
+        _this.closeModal();
 
         _this.users_array = resp.data;
       })["catch"](function (error) {
@@ -35138,7 +35147,7 @@ var render = function() {
                 "button",
                 {
                   staticClass:
-                    "btn btn-primary font-semibold text-xl text-gray-800 leading-tight",
+                    "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded",
                   attrs: { type: "button" },
                   on: { click: _vm.view_permissions }
                 },
@@ -35152,157 +35161,167 @@ var render = function() {
     },
     [
       _vm._v(" "),
-      _c("div", { staticClass: "py-12" }, [
-        _c("div", { staticClass: "max-w-7xl mx-auto sm:px-6 lg:px-8" }, [
-          _c(
-            "div",
-            { staticClass: "bg-white overflow-hidden shadow-xl sm:rounded-lg" },
-            [
+      _c("div", { staticClass: "items-center text-center" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "bg-white border-transparent rounded-md relative w-4/5 mt-10 mx-auto"
+          },
+          [
+            _c("table", { staticClass: "w-full text-center" }, [
+              _c("thead", [
+                _c("tr", [
+                  _c(
+                    "th",
+                    { staticClass: "font-medium px-5 py-3 border-b-2" },
+                    [
+                      _vm._v(
+                        "\n                        ID\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    { staticClass: "font-medium px-5 py-3 border-b-2" },
+                    [
+                      _vm._v(
+                        "\n                        NOMBRE\n                    "
+                      )
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
               _c(
-                "table",
-                { staticClass: "table" },
-                [
-                  [
-                    _c("thead", [
-                      _c("tr", [
-                        _c("th", { staticClass: "text-left" }, [
-                          _vm._v(
-                            "\n                                id\n                            "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("th", { staticClass: "text-left" }, [
-                          _vm._v(
-                            "\n                                Nombre permiso\n                            "
-                          )
-                        ])
-                      ])
+                "tbody",
+                _vm._l(_vm.permisos_array, function(item) {
+                  return _c("tr", [
+                    _c("td", { staticClass: "px-5 py-3 border-b-2" }, [
+                      _vm._v(_vm._s(item.id))
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "tbody",
-                      _vm._l(_vm.permisos_array, function(item) {
-                        return _c("tr", [
-                          _c("td", [_vm._v(_vm._s(item.id))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(item.name))])
-                        ])
-                      }),
-                      0
-                    )
-                  ]
-                ],
-                2
+                    _c("td", { staticClass: "px-5 py-3 border-b-2" }, [
+                      _vm._v(_vm._s(item.name))
+                    ])
+                  ])
+                }),
+                0
               )
-            ]
-          )
-        ])
+            ])
+          ]
+        )
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "py-12" },
-        [
-          _c("jet-dialog-modal", {
-            attrs: { show: _vm.isOpenModal, "max-width": "xl" },
-            on: { close: _vm.closeReportsModal },
-            scopedSlots: _vm._u(
-              [
-                {
-                  key: "title",
-                  fn: function() {
-                    return [_c("label", [_vm._v(" Crear Permiso")])]
-                  },
-                  proxy: true
-                },
-                _vm.modalData
-                  ? {
-                      key: "content",
-                      fn: function() {
-                        return [
-                          _c("div", { staticClass: "p-5" }, [
-                            _c("div", { staticClass: "gap-6" }, [
-                              _c("div", { staticClass: "mt-1" }, [
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass:
-                                      "flex flex-col sm:flex-row font-medium"
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                Nombre Permiso\n                            "
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c("div", [
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.modalData.name,
-                                        expression: "modalData.name"
-                                      }
-                                    ],
-                                    staticClass:
-                                      "form-control border border-b-2 dark:border-dark-5",
-                                    domProps: { value: _vm.modalData.name },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          _vm.modalData,
-                                          "name",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  })
-                                ])
-                              ])
-                            ])
-                          ])
-                        ]
-                      },
-                      proxy: true
-                    }
-                  : null,
-                {
-                  key: "footer",
+      _c("jet-dialog-modal", {
+        attrs: { show: _vm.isOpenModal, "max-width": "xl" },
+        on: { close: _vm.closeModal },
+        scopedSlots: _vm._u(
+          [
+            {
+              key: "title",
+              fn: function() {
+                return [_c("label", [_vm._v(" Crear Permiso")])]
+              },
+              proxy: true
+            },
+            _vm.modalData
+              ? {
+                  key: "content",
                   fn: function() {
                     return [
-                      _c(
-                        "button",
-                        {
-                          on: {
-                            click: function($event) {
-                              return _vm.save(_vm.modalData)
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                    Guardar\n                "
-                          )
-                        ]
-                      )
+                      _c("div", { staticClass: "p-5" }, [
+                        _c("div", { staticClass: "gap-6" }, [
+                          _c("div", { staticClass: "mt-1" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass:
+                                  "flex flex-col sm:flex-row font-medium"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            Nombre Permiso\n                        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.modalData.name,
+                                    expression: "modalData.name"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                domProps: { value: _vm.modalData.name },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.modalData,
+                                      "name",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ])
+                        ])
+                      ])
                     ]
                   },
                   proxy: true
                 }
-              ],
-              null,
-              true
-            )
-          })
-        ],
-        1
-      )
-    ]
+              : null,
+            {
+              key: "footer",
+              fn: function() {
+                return [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.save(_vm.modalData)
+                        }
+                      }
+                    },
+                    [_vm._v("\n                Guardar\n            ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded",
+                      attrs: { type: "button" },
+                      on: { click: _vm.closeModal }
+                    },
+                    [_vm._v("\n                Cancelar\n            ")]
+                  )
+                ]
+              },
+              proxy: true
+            }
+          ],
+          null,
+          true
+        )
+      })
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -35340,7 +35359,7 @@ var render = function() {
                 "button",
                 {
                   staticClass:
-                    "btn btn-primary font-semibold text-xl text-gray-800 leading-tight",
+                    "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded",
                   attrs: { type: "button" },
                   on: { click: _vm.view_permissions }
                 },
@@ -35354,157 +35373,168 @@ var render = function() {
     },
     [
       _vm._v(" "),
-      _c("div", { staticClass: "py-12" }, [
-        _c("div", { staticClass: "max-w-7xl mx-auto sm:px-6 lg:px-8" }, [
-          _c(
-            "div",
-            { staticClass: "bg-white overflow-hidden shadow-xl sm:rounded-lg" },
-            [
+      _c("div", { staticClass: "items-center text-center" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "bg-white border-transparent rounded-md relative w-4/5 mt-10 mx-auto"
+          },
+          [
+            _c("table", { staticClass: "w-full text-center" }, [
+              _c("thead", [
+                _c("tr", [
+                  _c(
+                    "th",
+                    { staticClass: "font-medium px-5 py-3 border-b-2" },
+                    [
+                      _vm._v(
+                        "\n                        ID\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    { staticClass: "font-medium px-5 py-3 border-b-2" },
+                    [
+                      _vm._v(
+                        "\n                        NOMBRE\n                    "
+                      )
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
               _c(
-                "table",
-                { staticClass: "table" },
-                [
-                  [
-                    _c("thead", [
-                      _c("tr", [
-                        _c("th", { staticClass: "text-left" }, [
-                          _vm._v(
-                            "\n                                id\n                            "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("th", { staticClass: "text-left" }, [
-                          _vm._v(
-                            "\n                                Nombre Rol\n                            "
-                          )
-                        ])
-                      ])
+                "tbody",
+                _vm._l(_vm.roles_array, function(item) {
+                  return _c("tr", [
+                    _c("td", { staticClass: "px-5 py-3 border-b-2" }, [
+                      _vm._v(_vm._s(item.id))
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "tbody",
-                      _vm._l(_vm.roles_array, function(item) {
-                        return _c("tr", [
-                          _c("td", [_vm._v(_vm._s(item.id))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(item.name))])
-                        ])
-                      }),
-                      0
-                    )
-                  ]
-                ],
-                2
+                    _c("td", { staticClass: "px-5 py-3 border-b-2" }, [
+                      _vm._v(_vm._s(item.name))
+                    ])
+                  ])
+                }),
+                0
               )
-            ]
-          )
-        ])
+            ])
+          ]
+        )
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "py-12" },
-        [
-          _c("jet-dialog-modal", {
-            attrs: { show: _vm.isOpenModal, "max-width": "xl" },
-            on: { close: _vm.closeReportsModal },
-            scopedSlots: _vm._u(
-              [
-                {
-                  key: "title",
-                  fn: function() {
-                    return [_c("label", [_vm._v(" Crear Rol")])]
-                  },
-                  proxy: true
-                },
-                _vm.modalData
-                  ? {
-                      key: "content",
-                      fn: function() {
-                        return [
-                          _c("div", { staticClass: "p-5" }, [
-                            _c("div", { staticClass: "gap-6" }, [
-                              _c("div", { staticClass: "mt-1" }, [
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass:
-                                      "flex flex-col sm:flex-row font-medium"
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                Nombre Rol\n                            "
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c("div", [
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.modalData.name,
-                                        expression: "modalData.name"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: { label: "Another input" },
-                                    domProps: { value: _vm.modalData.name },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          _vm.modalData,
-                                          "name",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  })
-                                ])
-                              ])
-                            ])
-                          ])
-                        ]
-                      },
-                      proxy: true
-                    }
-                  : null,
-                {
-                  key: "footer",
+      _c("jet-dialog-modal", {
+        attrs: { show: _vm.isOpenModal, "max-width": "xl" },
+        on: { close: _vm.closeModal },
+        scopedSlots: _vm._u(
+          [
+            {
+              key: "title",
+              fn: function() {
+                return [_c("label", [_vm._v(" Crear Rol")])]
+              },
+              proxy: true
+            },
+            _vm.modalData
+              ? {
+                  key: "content",
                   fn: function() {
                     return [
-                      _c(
-                        "button",
-                        {
-                          on: {
-                            click: function($event) {
-                              return _vm.save(_vm.modalData)
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                    Guardar\n                "
-                          )
-                        ]
-                      )
+                      _c("div", { staticClass: "p-5" }, [
+                        _c("div", { staticClass: "gap-6" }, [
+                          _c("div", { staticClass: "mt-1" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass:
+                                  "flex flex-col sm:flex-row font-medium"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            Nombre Rol\n                        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.modalData.name,
+                                    expression: "modalData.name"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                attrs: { label: "Another input" },
+                                domProps: { value: _vm.modalData.name },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.modalData,
+                                      "name",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ])
+                        ])
+                      ])
                     ]
                   },
                   proxy: true
                 }
-              ],
-              null,
-              true
-            )
-          })
-        ],
-        1
-      )
-    ]
+              : null,
+            {
+              key: "footer",
+              fn: function() {
+                return [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.save(_vm.modalData)
+                        }
+                      }
+                    },
+                    [_vm._v("\n                Guardar\n            ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded",
+                      attrs: { type: "button" },
+                      on: { click: _vm.closeModal }
+                    },
+                    [_vm._v("\n                Cancelar\n            ")]
+                  )
+                ]
+              },
+              proxy: true
+            }
+          ],
+          null,
+          true
+        )
+      })
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -35530,412 +35560,444 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("app-layout", [
-    _c("div", [
-      _c("div", { staticClass: "intro-y box" }, [
-        _c("table", { staticClass: "table text-center" }, [
-          _c("thead", [
-            _c("tr", { staticClass: "border-b-2 dark:border-dark-5" }, [
-              _c("th", { staticClass: "border-b-2 dark:border-dark-5" }, [
-                _vm._v(
-                  "\n                            ID\n                        "
-                )
+  return _c(
+    "app-layout",
+    [
+      _c("div", { staticClass: "items-center text-center" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "bg-white border-transparent rounded-md relative w-4/5 mt-10 mx-auto"
+          },
+          [
+            _c("table", { staticClass: "w-full text-center" }, [
+              _c("thead", [
+                _c("tr", [
+                  _c(
+                    "th",
+                    { staticClass: "font-medium px-5 py-3 border-b-2" },
+                    [
+                      _vm._v(
+                        "\n                            ID\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "th",
+                    { staticClass: "font-medium px-5 py-3 border-b-2" },
+                    [
+                      _vm._v(
+                        "\n                            NOMBRE\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "font-medium px-5 py-3 border-b-2" })
+                ])
               ]),
               _vm._v(" "),
-              _c("th", { staticClass: "border-b-2 dark:border-dark-5" }, [
-                _vm._v(
-                  "\n                            Nombre Rol\n                        "
-                )
-              ])
+              _c(
+                "tbody",
+                _vm._l(_vm.users_array, function(user) {
+                  return _c("tr", [
+                    _c("td", { staticClass: "px-5 py-3 border-b-2" }, [
+                      _vm._v(_vm._s(user.id))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "px-5 py-3 border-b-2" }, [
+                      _vm._v(_vm._s(user.name + " " + user.last_name))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "px-5 py-3 border-b-2" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.view_permissions(user)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                Actualizar Información de Usuarios\n                            "
+                          )
+                        ]
+                      )
+                    ])
+                  ])
+                }),
+                0
+              )
             ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.users_array, function(item) {
-              return _c("tr", [
-                _c("td", { staticClass: "border-b-2 dark:border-dark-5" }, [
-                  _vm._v(_vm._s(item.id))
-                ]),
-                _vm._v(" "),
-                _c("td", { staticClass: "border-b-2 dark:border-dark-5" }, [
-                  _vm._v(_vm._s(item.name))
-                ]),
-                _vm._v(" "),
-                _c("td", [
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("jet-dialog-modal", {
+        attrs: { show: _vm.isOpenModal, "max-width": "xl" },
+        on: { close: _vm.closeModal },
+        scopedSlots: _vm._u(
+          [
+            _vm.users_array
+              ? {
+                  key: "title",
+                  fn: function() {
+                    return [_c("label", [_vm._v("Actualizar Usuarios")])]
+                  },
+                  proxy: true
+                }
+              : null,
+            _vm.modalData
+              ? {
+                  key: "content",
+                  fn: function() {
+                    return [
+                      _c("div", { staticClass: "p-5" }, [
+                        _c("div", { staticClass: "grid grid-col-2 gap-4" }, [
+                          _c("div", { staticClass: "mt-1" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass:
+                                  "flex flex-col sm:flex-row font-medium"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                           Nombres\n                        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.modalData.name,
+                                    expression: "modalData.name"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                domProps: { value: _vm.modalData.name },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.modalData,
+                                      "name",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mt-1" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass:
+                                  "flex flex-col sm:flex-row font-medium"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            Apellidos\n                        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.modalData.last_name,
+                                    expression: "modalData.last_name"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                domProps: { value: _vm.modalData.last_name },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.modalData,
+                                      "last_name",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mt-1" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass:
+                                  "flex flex-col sm:flex-row font-medium"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            Teléfono\n                        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.modalData.phone,
+                                    expression: "modalData.phone"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                domProps: { value: _vm.modalData.phone },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.modalData,
+                                      "phone",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mt-1" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass:
+                                  "flex flex-col sm:flex-row font-medium"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            Email\n                        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.modalData.email,
+                                    expression: "modalData.email"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                domProps: { value: _vm.modalData.email },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.modalData,
+                                      "email",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mt-1" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass:
+                                  "flex flex-col sm:flex-row font-medium"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            Rol\n                        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.modalData.role_id,
+                                      expression: "modalData.role_id"
+                                    }
+                                  ],
+                                  staticClass:
+                                    "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.modalData,
+                                        "role_id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                _vm._l(_vm.role_array, function(role) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: role.id,
+                                      domProps: { value: role.id }
+                                    },
+                                    [
+                                      _vm._v(
+                                        _vm._s(role.name) +
+                                          "\n                                "
+                                      )
+                                    ]
+                                  )
+                                }),
+                                0
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mt-1" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass:
+                                  "flex flex-col sm:flex-row font-medium"
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            Permisos Asociados\n                        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _vm.modalData.roles &&
+                            _vm.modalData.roles.permissions
+                              ? _c(
+                                  "div",
+                                  _vm._l(
+                                    _vm.modalData.roles.permissions,
+                                    function(permission) {
+                                      return _c(
+                                        "span",
+                                        {
+                                          key: permission.id,
+                                          staticClass: "mx-4"
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                " +
+                                              _vm._s(permission.name) +
+                                              "\n                            "
+                                          )
+                                        ]
+                                      )
+                                    }
+                                  ),
+                                  0
+                                )
+                              : _c("div", [
+                                  _c("span", { staticClass: "text-red-400" }, [
+                                    _vm._v(
+                                      "El usuario no tiene permisos asociados"
+                                    )
+                                  ])
+                                ])
+                          ])
+                        ])
+                      ])
+                    ]
+                  },
+                  proxy: true
+                }
+              : null,
+            {
+              key: "footer",
+              fn: function() {
+                return [
                   _c(
                     "button",
                     {
                       staticClass:
-                        "btn btn-primary font-semibold text-xl text-gray-800 leading-tight",
+                        "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded",
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {
-                          return _vm.view_permissions(item)
+                          return _vm.save(_vm.modalData)
                         }
                       }
                     },
-                    [
-                      _vm._v(
-                        "\n                                Actualizar Información de Usuarios\n                            "
-                      )
-                    ]
+                    [_vm._v("\n                Guardar\n            ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded",
+                      attrs: { type: "button" },
+                      on: { click: _vm.closeModal }
+                    },
+                    [_vm._v("\n                Cancelar\n            ")]
                   )
-                ])
-              ])
-            }),
-            0
-          )
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "py-12" },
-      [
-        _c("jet-dialog-modal", {
-          attrs: { show: _vm.isOpenModal, "max-width": "xl" },
-          on: { close: _vm.closeReportsModal },
-          scopedSlots: _vm._u(
-            [
-              _vm.users_array
-                ? {
-                    key: "title",
-                    fn: function() {
-                      return [_c("label", [_vm._v("Actualizar Usuarios")])]
-                    },
-                    proxy: true
-                  }
-                : null,
-              _vm.modalData
-                ? {
-                    key: "content",
-                    fn: function() {
-                      return [
-                        _c("div", { staticClass: "p-5" }, [
-                          _c("div", { staticClass: "gap-6" }, [
-                            _c("div", { staticClass: "mt-1" }, [
-                              _c(
-                                "label",
-                                {
-                                  staticClass:
-                                    "flex flex-col sm:flex-row font-medium"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                               Nombre Usuario\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("div", [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.modalData.name,
-                                      expression: "modalData.name"
-                                    }
-                                  ],
-                                  staticClass:
-                                    "form-control border border-b-2 dark:border-dark-5",
-                                  domProps: { value: _vm.modalData.name },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.modalData,
-                                        "name",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "mt-1" }, [
-                              _c(
-                                "label",
-                                {
-                                  staticClass:
-                                    "flex flex-col sm:flex-row font-medium"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                Apellido\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("div", [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.modalData.last_name,
-                                      expression: "modalData.last_name"
-                                    }
-                                  ],
-                                  staticClass:
-                                    "form-control border border-b-2 dark:border-dark-5",
-                                  domProps: { value: _vm.modalData.last_name },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.modalData,
-                                        "last_name",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "mt-1" }, [
-                              _c(
-                                "label",
-                                {
-                                  staticClass:
-                                    "flex flex-col sm:flex-row font-medium"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                Telefono\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("div", [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.modalData.phone,
-                                      expression: "modalData.phone"
-                                    }
-                                  ],
-                                  staticClass:
-                                    "form-control border border-b-2 dark:border-dark-5",
-                                  domProps: { value: _vm.modalData.phone },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.modalData,
-                                        "phone",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "mt-1" }, [
-                              _c(
-                                "label",
-                                {
-                                  staticClass:
-                                    "flex flex-col sm:flex-row font-medium"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                Email\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("div", [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.modalData.email,
-                                      expression: "modalData.email"
-                                    }
-                                  ],
-                                  staticClass:
-                                    "form-control border border-b-2 dark:border-dark-5",
-                                  domProps: { value: _vm.modalData.email },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.modalData,
-                                        "email",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                })
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "mt-1" }, [
-                              _c(
-                                "label",
-                                {
-                                  staticClass:
-                                    "flex flex-col sm:flex-row font-medium"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                Rol\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("div", [
-                                _c(
-                                  "select",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.modalData.role_id,
-                                        expression: "modalData.role_id"
-                                      }
-                                    ],
-                                    staticClass: "form-select",
-                                    on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.$set(
-                                          _vm.modalData,
-                                          "role_id",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        )
-                                      }
-                                    }
-                                  },
-                                  _vm._l(_vm.role_array, function(works) {
-                                    return _c(
-                                      "option",
-                                      {
-                                        key: works.id,
-                                        domProps: { value: works.id }
-                                      },
-                                      [
-                                        _vm._v(
-                                          _vm._s(works.name) +
-                                            "\n                                    "
-                                        )
-                                      ]
-                                    )
-                                  }),
-                                  0
-                                )
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "mt-1" }, [
-                              _c(
-                                "label",
-                                {
-                                  staticClass:
-                                    "flex flex-col sm:flex-row font-medium"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                Permisos Asociados\n                            "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                _vm._l(
-                                  _vm.modalData.roles.permissions,
-                                  function(permission) {
-                                    return _c(
-                                      "span",
-                                      {
-                                        key: permission.id,
-                                        staticClass: "mx-4"
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                    " +
-                                            _vm._s(permission.name) +
-                                            "\n                                "
-                                        )
-                                      ]
-                                    )
-                                  }
-                                ),
-                                0
-                              )
-                            ])
-                          ])
-                        ])
-                      ]
-                    },
-                    proxy: true
-                  }
-                : null,
-              {
-                key: "footer",
-                fn: function() {
-                  return [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            return _vm.save(_vm.modalData)
-                          }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                    Guardar\n                "
-                        )
-                      ]
-                    )
-                  ]
-                },
-                proxy: true
-              }
-            ],
-            null,
-            true
-          )
-        })
-      ],
-      1
-    )
-  ])
+                ]
+              },
+              proxy: true
+            }
+          ],
+          null,
+          true
+        )
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

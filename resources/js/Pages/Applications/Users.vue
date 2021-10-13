@@ -1,24 +1,27 @@
 <template>
     <app-layout>
-        <div>
-            <div class="intro-y box">
-                <table class="table text-center" >
+        <div class="items-center text-center">
+            <div class="bg-white border-transparent rounded-md relative w-4/5 mt-10 mx-auto">
+                <table class="w-full text-center">
                     <thead>
-                        <tr class="border-b-2 dark:border-dark-5">
-                            <th class="border-b-2 dark:border-dark-5">
+                        <tr>
+                            <th class="font-medium px-5 py-3 border-b-2">
                                 ID
                             </th>
-                            <th class="border-b-2 dark:border-dark-5">
-                                Nombre Rol
+                            <th class="font-medium px-5 py-3 border-b-2">
+                                NOMBRE
+                            </th>
+                            <th class="font-medium px-5 py-3 border-b-2">
+
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in users_array">
-                            <td class="border-b-2 dark:border-dark-5">{{ item.id }}</td>
-                            <td class="border-b-2 dark:border-dark-5">{{ item.name }}</td>
-                            <td>
-                                <button type="button" class="btn btn-primary font-semibold text-xl text-gray-800 leading-tight" @click="view_permissions(item)">
+                        <tr v-for="user in users_array">
+                            <td class="px-5 py-3 border-b-2">{{ user.id }}</td>
+                            <td class="px-5 py-3 border-b-2">{{ user.name + ' ' +  user.last_name }}</td>
+                            <td class="px-5 py-3 border-b-2">
+                                <button type="button" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" @click="view_permissions(user)">
                                     Actualizar Información de Usuarios
                                 </button>
                             </td>
@@ -28,83 +31,88 @@
             </div>
         </div>
 
-        <div class="py-12">
-            <jet-dialog-modal :show="isOpenModal" @close="closeReportsModal" max-width=xl>
-                <template #title v-if="users_array">
-                    <label >Actualizar Usuarios</label>
-                </template>
+        <jet-dialog-modal :show="isOpenModal" @close="closeModal" max-width=xl>
+            <template #title v-if="users_array">
+                <label >Actualizar Usuarios</label>
+            </template>
 
-                <template #content v-if="modalData">
-                    <div class="p-5">
-                        <div class="gap-6">
-                            <div class="mt-1">
-                                <label class="flex flex-col sm:flex-row font-medium">
-                                   Nombre Usuario
-                                </label>
-                                <div>
-                                    <input class="form-control border border-b-2 dark:border-dark-5" v-model="modalData.name">
-                                </div>
+            <template #content v-if="modalData">
+                <div class="p-5">
+                    <div class="grid grid-col-2 gap-4">
+                        <div class="mt-1">
+                            <label class="flex flex-col sm:flex-row font-medium">
+                               Nombres
+                            </label>
+                            <div>
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" v-model="modalData.name">
                             </div>
-                            <div class="mt-1">
-                                <label class="flex flex-col sm:flex-row font-medium">
-                                    Apellido
-                                </label>
-                                <div>
-                                    <input class="form-control border border-b-2 dark:border-dark-5" v-model="modalData.last_name">
-                                </div>
+                        </div>
+                        <div class="mt-1">
+                            <label class="flex flex-col sm:flex-row font-medium">
+                                Apellidos
+                            </label>
+                            <div>
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" v-model="modalData.last_name">
                             </div>
-                            <div class="mt-1">
-                                <label class="flex flex-col sm:flex-row font-medium">
-                                    Telefono
-                                </label>
-                                <div>
-                                    <input class="form-control border border-b-2 dark:border-dark-5" v-model="modalData.phone">
-                                </div>
+                        </div>
+                        <div class="mt-1">
+                            <label class="flex flex-col sm:flex-row font-medium">
+                                Teléfono
+                            </label>
+                            <div>
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" v-model="modalData.phone">
                             </div>
-                            <div class="mt-1">
-                                <label class="flex flex-col sm:flex-row font-medium">
-                                    Email
-                                </label>
-                                <div>
-                                    <input class="form-control border border-b-2 dark:border-dark-5" v-model="modalData.email">
-                                </div>
+                        </div>
+                        <div class="mt-1">
+                            <label class="flex flex-col sm:flex-row font-medium">
+                                Email
+                            </label>
+                            <div>
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" v-model="modalData.email">
                             </div>
-                            <div class="mt-1">
-                                <label class="flex flex-col sm:flex-row font-medium">
-                                    Rol
-                                </label>
-                                <div>
-                                    <select class="form-select" v-model="modalData.role_id">
-                                        <option
-                                            v-for="works in role_array"
-                                            v-bind:key="works.id"
-                                            :value="works.id">{{works.name}}
-                                        </option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="mt-1">
+                            <label class="flex flex-col sm:flex-row font-medium">
+                                Rol
+                            </label>
+                            <div>
+                                <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" v-model="modalData.role_id">
+                                    <option
+                                        v-for="role in role_array"
+                                        v-bind:key="role.id"
+                                        :value="role.id">{{ role.name }}
+                                    </option>
+                                </select>
                             </div>
-                            <div class="mt-1">
-                                <label class="flex flex-col sm:flex-row font-medium">
-                                    Permisos Asociados
-                                </label>
-                                <div>
-                                    <span class="mx-4"  v-for="permission in modalData.roles.permissions"
-                                          v-bind:key="permission.id">
-                                        {{permission.name}}
-                                    </span>
-                                </div>
+                        </div>
+                        <div class="mt-1">
+                            <label class="flex flex-col sm:flex-row font-medium">
+                                Permisos Asociados
+                            </label>
+                            <div v-if="modalData.roles && modalData.roles.permissions">
+                                <span class="mx-4" v-for="permission in modalData.roles.permissions"
+                                      v-bind:key="permission.id">
+                                    {{permission.name}}
+                                </span>
+                            </div>
+                            <div v-else>
+                                <span class="text-red-400">El usuario no tiene permisos asociados</span>
                             </div>
                         </div>
                     </div>
-                </template>
+                </div>
+            </template>
 
-                <template #footer>
-                    <button  type="button" class="btn btn-primary" @click="save(modalData)">
-                        Guardar
-                    </button>
-                </template>
-            </jet-dialog-modal>
-        </div>
+            <template #footer>
+                <button  type="button" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" @click="save(modalData)">
+                    Guardar
+                </button>
+
+                <button type="button" class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded" @click="closeModal">
+                    Cancelar
+                </button>
+            </template>
+        </jet-dialog-modal>
     </app-layout>
 </template>
 
@@ -140,13 +148,13 @@ export default {
             this.modalData = row
         },
 
-        closeReportsModal(){
+        closeModal(){
             this.isOpenModal = false
         },
 
         save(data) {
             axios.post(route('save_users'), data).then(resp => {
-                this.closeReportsModal();
+                this.closeModal();
                 this.users_array = resp.data
             }).catch(error => {
                 if (error.response.status === 422) {
